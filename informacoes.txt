@@ -1,3 +1,10 @@
-Utilização do algoritimo LSTM (Long Short-term Memory)
-Prever preço de ações (bluechips) Emrpesas petroleiras
-Futuramente utilizar uma analise d sentimento das noticias relacionadas ao petroleo
+Utilização do algoritimo de Rede Neural LSTM (Long Short-term Memory)
+
+Bibliotecas principais, scikit learn e tensor flow
+
+Prever preço de ações de empresas petroleiras (petrobras,prio, bava energia, petro reconcavo, ultrapar e cosan)
+
+Utilizar uma analise de sentimento das noticias relacionadas ao petroleo
+
+Por que, o LTSM?
+É interessante para dados sequenciais (no caso uma série temporal)
