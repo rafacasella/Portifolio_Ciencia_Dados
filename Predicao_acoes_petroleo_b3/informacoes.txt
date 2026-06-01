@@ -18,10 +18,30 @@ Relatórios financeiros → Impacto em semanas
 Por que, o LTSM?
 É interessante para dados sequenciais (no caso uma série temporal)
 
+Separe o Treino do Teste ANTES de escalar: Um erro muito comum é aplicar o scaler em todo o DataFrame de uma vez.
+Isso causa vazamento de dados (data leakage), fazendo com que o modelo "preveja o futuro" porque ele já conhece o valor máximo que só aconteceria lá na base de teste.
+
+
 Captura dependências temporais de longo prazo
 Lida bem com sequências longas de dados históricos
 Memória seletiva evita o problema de vanishing gradient
 Excelente para capturar padrões sazonais e cíclicos
+
+por que isso é necessário?
+
+Para finalizar a sua previsão multivariada com LSTM, você precisa criar as janelas temporais de dados (geralmente de 60 dias)
+Janelas temporais são necessárias porque as redes LSTM não conseguem prever o futuro olhando para apenas um único dia isolado.
+Elas precisam identificar padrões, tendências e sazonalidades ao longo do tempo
+
+Como a LSTM "Enxerga" os DadosContexto sequencial: Para prever o preço de amanhã, a rede precisa saber se o preço vem subindo ou caindo
+ nos últimos dois meses.Memória de curto e longo prazo: A janela de 60 dias fornece o histórico necessário para as células da LSTM decidirem
+ quais informações passadas reter ou descartar.Formato do algoritmo: O modelo exige uma entrada tridimensional (amostras, passos de tempo, recursos).
+ A janela define exatamente esses "passos de tempo" (time steps).
+
+ Dropout é importante, pois cada vez que a rede neural rodar, ela vai desligar alguns neuronios (no caso 20%):
+ isso auxilia na não memorização, deixando a rede mais generalista
+ units=50, numero de valores memorizados passados
+
 
 Vantagens: ✅ Memória de longo prazo
 ✅ Captura tendências e sazonalidade
