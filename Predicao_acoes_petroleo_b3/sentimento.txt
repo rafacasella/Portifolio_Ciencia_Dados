@@ -1,0 +1,10 @@
+Utilizar uma analise de sentimento das noticias relacionadas ao petroleo:
+Impacto Comprovado:
+📊 Estudos acadêmicos mostram correlação de 0.6-0.8 entre sentimento e movimentos de preço
+🚀 Tweets de influenciadores podem mover mercados em minutos (ex: Elon Musk e Bitcoin)
+📰 Notícias corporativas causam volatilidade imediata
+Janela Temporal:
+Notícias → Impacto em minutos a horas
+Tweets → Impacto quase instantâneo
+Análises de analistas → Impacto em dias
+Relatórios financeiros → Impacto em semanas
