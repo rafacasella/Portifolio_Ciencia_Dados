@@ -53,3 +53,10 @@ Desvantagens: ❌ Requer muitos dados
 
 Empresas:
 Mapa de calor, mostra forte correlação entre elas
+
+MAE (%) / MAPE: Representa exatamente o erro percentual médio diário.
+Um MAE de 2.5% significa que as previsões do modelo erram, em média, 2,5% para cima ou para baixo do valor real da ação.
+RMSE (%): Mostra o desvio padrão dos erros em termos percentuais. Como ele penaliza erros maiores de forma mais severa,
+é uma ótima métrica para checar se o modelo teve "sustos" ou falhas graves em dias de alta volatilidade.
+
+Solução: Use uma técnica chamada Early Stopping para interromper o treino assim que o erro de validação parar de cair
