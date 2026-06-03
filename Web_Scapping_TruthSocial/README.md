@@ -25,7 +25,7 @@ Desenvolvido como parte do meu portfólio de Ciência de Dados, o projeto supera
 *   **Regular Expressions (re):** Tratamento e limpeza de strings brutas, eliminando tags HTML contidas nos payloads da API.
 
 ---
-## 📈 Resultados e Aprendizados Técnicos
+## 📈 Aprendizados Técnicos
 
 ### 1. Resolução de Deadlocks de Carregamento
 Redes sociais baseadas na arquitetura Mastodon/Next.js realizam conexões WebSocket e carregamentos de mídia infinitos. O uso estratégico de `wait_until="domcontentloaded"` e limites estritos de *timeout* (35 segundos) impediram que o script sofresse congelamento de execução (*deadlocks*).
@@ -35,6 +35,14 @@ Durante a fase de desenvolvimento, identificou-se que variações de ambiente no
 
 ### 3. Eficiência de Dados
 A extração focada na resposta da API (`response.json()`) provou ser **82% mais rápida** do que a varredura tradicional de elementos visuais do DOM (`page.query_selector_all`), além de tornar o software imune a qualquer atualização de design ou interface da Truth Social.
+
+---
+## 📈 Resultado:
+
+### Monitoramento Constante:
+O sistema monitora postagens do presidente norte-americano, referente ao conflito vigente na data deste repositório, que visam o impacto nos preços de algumas commodities em especial o petróleo.
+Essas postagens tem a possibilidade de impactar fortemente o preço da commoditie e por consequência dos ativos financeiro norte-americanos, bem como do restante do mundo (em particular o brasil, devido a sua forte relação entre commodities X economia).
+
 
 ---
 
