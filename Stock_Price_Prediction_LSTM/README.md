@@ -1,74 +1,74 @@
-# Modelagem Preditiva de Preços para Ações do Setor Petrolífero
+# Predictive Price Modeling for Oil Sector Stocks
 
-Este projeto implementa um modelo de Inteligência Artificial baseado em redes neurais para prever o preço de fechamento de grandes empresas do setor petrolífero e de energia do mercado brasileiro.
+This project implements an Artificial Intelligence model based on neural networks to predict the closing price of major oil and energy companies in the Brazilian stock market.
 
-## 🎯 Objetivo do Projeto
+## 🎯 Project Objective
 
-Prever o comportamento do preço das ações de quatro grandes players do setor petrolífero e de energia:
+Predict price behavior for four major players in the oil and energy sector:
 * **Petrobras (PETR4)**
 * **Prio (PRIO3)**
 * **Ultrapar (UGPA3)**
 * **Cosan (CSAN3)**
 
-O sistema utiliza dados históricos de séries temporais para identificar padrões e auxiliar na tomada de decisões estratégicas de investimentos.
+The system utilizes historical time series data to identify patterns and support strategic investment decision-making.
 
-## 🧠 Por que utilizar a rede LSTM?
+## 🧠 Why Use LSTM Networks?
 
-A arquitetura **LSTM (Long Short-Term Memory)** foi escolhida por ser uma variação especializada de Redes Neurais Recorrentes (RNN) ideal para este problema.
+The **LSTM (Long Short-Term Memory)** architecture was selected because it is a specialized variation of Recurrent Neural Networks (RNN) ideal for this problem.
 
-* **Dados Sequenciais:** Perfeita para modelar séries temporais financeiras.
-* **Dependências de Longo Prazo:** Consegue capturar relações de tempo distantes no histórico.
-* **Histórico Longo:** Lida eficientemente com grandes volumes de dados passados.
-* **Memória Seletiva:** Suas portas internas evitam o problema do *vanishing gradient* (desaparecimento do gradiente).
-* **Padrões Complexos:** Excelente capacidade para capturar movimentos sazonais e cíclicos do mercado de commodities.
+* **Sequential Data:** Perfect for modeling financial time series.
+* **Long-Term Dependencies:** Captures time relationships distant in the history.
+* **Long Historical Record:** Efficiently handles large volumes of past data.
+* **Selective Memory:** Internal gates prevent the vanishing gradient problem.
+* **Complex Patterns:** Excellent capability to capture seasonal and cyclical movements of the commodities market.
 
-### 📊 Prós e Contras da LSTM
+### 📊 LSTM Pros and Cons
 
 
-| Vantagens (✅) | Desvantagens (❌) |
+| Advantages (✅) | Disadvantages (❌) |
 | :--- | :--- |
-| Memória de longo prazo robusta | Requer grande volume de dados para treino |
-| Captura tendências complexas e sazonalidade | Processamento computacionalmente custoso |
-| Estado da arte para previsão de séries temporais | Hiperparâmetros altamente sensíveis |
+| Robust long-term memory | Requires large volume of training data |
+| Captures complex trends and seasonality | Computationally expensive processing |
+| State-of-the-art for time series forecasting | Highly sensitive hyperparameters |
 
-## 🛠️ Tecnologias e Bibliotecas Principais
+## 🛠️ Core Tech Stack & Libraries
 
-* **TensorFlow / Keras:** Construção, treinamento e avaliação da rede neural profunda LSTM.
-* **Scikit-Learn:** Separação de dados, pré-processamento (escalagem) e métricas de validação.
-* **Pandas & NumPy:** Manipulação algorítmica e estruturação dos dados financeiros.
+* **TensorFlow / Keras:** Construction, training, and evaluation of the deep LSTM neural network.
+* **Scikit-Learn:** Data splitting, preprocessing (scaling), and validation metrics.
+* **Pandas & NumPy:** Algorithmic manipulation and structuring of financial data.
 
-## 🔧 Principais Ajustes e Arquitetura do Modelo
+## 🔧 Core Model Architecture & Adjustments
 
-### 1. Escalagem dos Dados e Prevenção de Data Leakage
-A separação entre os dados de **Treino** e **Teste** é feita **ANTES** de aplicar a escala nos dados (como o `MinMaxScaler`). 
-* **Por que fazer isso?** Aplicar o scaler em todo o DataFrame de uma vez causaria *data leakage* (vazamento de dados). O modelo "preveria o futuro" de forma artificial porque conheceria previamente o valor máximo global que só aconteceria na base de teste.
+### 1. Data Scaling & Data Leakage Prevention
+The split between **Train** and **Test** data is performed **BEFORE** applying data scaling (such as `MinMaxScaler`). 
+* **Why do this?** Applying the scaler to the entire DataFrame at once would cause *data leakage*. The model would artificially "predict the future" because it would have prior knowledge of the global maximum value that only occurs within the test set.
 
-### 2. Criação de Janelas Temporais (Multivariada)
-O modelo foi estruturado utilizando **janelas temporais de 60 dias**.
-* **Necessidade:** Redes LSTM não conseguem prever o amanhã olhando apenas para um dia isolado. Elas precisam de contexto sequencial para identificar tendências.
-* **Como a rede enxerga:** Para estimar o preço do dia seguinte, a rede analisa se a ação subiu ou caiu nos últimos dois meses. Essa janela fornece o histórico para as células da LSTM decidirem quais informações reter ou descartar.
+### 2. Time Window Creation (Multivariate)
+The model was structured utilizing **60-day time windows**.
+* **The Need:** LSTM networks cannot predict tomorrow by looking at a single isolated day. They require sequential context to identify trends.
+* **How the Network Sees It:** To estimate the next day's price, the network analyzes whether the stock rose or fell over the last two months. This window provides the history for the LSTM cells to decide which information to retain or discard.
 
-### 3. Camadas e Hiperparâmetros
-* **Units (50):** Define o número de valores e estados que a célula memoriza do passado em cada camada.
-* **Dropout (20%):** A cada iteração do treino, 20% dos neurônios são desligados aleatoriamente. Isso força a rede a não memorizar os dados (overfitting), tornando o modelo muito mais generalista.
-* **Early Stopping:** Técnica de interrupção implementada para parar o treinamento automaticamente assim que o erro de validação parar de cair, economizando tempo computacional e evitando o sobreajuste.
+### 3. Layers & Hyperparameters
+* **Units (50):** Defines the number of values and states the cell memorizes from the past in each layer.
+* **Dropout (20%):** During each training iteration, 20% of the neurons are randomly deactivated. This forces the network to avoid memorizing data (overfitting), making the model much more generalizable.
+* **Early Stopping:** An implementation technique to automatically halt training as soon as validation loss stops decreasing, saving computational time and preventing overfitting.
 
-## 📈 Erro e Validação
+## 📈 Error & Validation
 
-O sucesso do modelo é medido através de duas métricas principais expressas em formato percentual:
+Model success is measured through two primary metrics expressed in percentage format:
 
-* **MAE (%) / MAPE (Erro Médio Absoluto Percentual):** Representa o erro percentual médio diário das previsões. 
-  * *Exemplo:* Um MAE de 2,5% significa que as previsões erram, em média, 2,5% para cima ou para baixo do valor real da ação.
-* **RMSE (%) (Raiz do Erro Quadrático Médio):** Mostra o desvio padrão dos erros de forma percentual. Como penaliza erros maiores severamente, é ideal para checar se o modelo sofreu "sustos" ou falhas graves em dias de alta volatilidade do setor petrolífero.
+* **MAE (%) / MAPE (Mean Absolute Percentage Error):** Represents the average daily percentage error of the predictions. 
+  * *Example:* A 2.5% MAE means that predictions miss, on average, by 2.5% above or below the actual stock value.
+* **RMSE (%) (Root Mean Squared Error):** Displays the standard deviation of errors in a percentage format. Since it severely penalizes larger errors, it is ideal for checking whether the model suffered major failures during high-volatility days in the oil sector.
 
-## 🚀 Como Executar o Projeto
+## 🚀 How to Run the Project
 
-1. Clone o repositório:
+1. Clone the repository:
    ```bash
    git clone https://github.com
    ```
-2. Instale as dependências:
+2. Install the dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Execute o script principal ou Jupyter Notebook para treinar e avaliar o modelo.
+3. Run the main script or Jupyter Notebook to train and evaluate the model.
