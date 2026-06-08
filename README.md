@@ -1,60 +1,56 @@
-# 📊 Portfólio de Ciência de Dados
+# 📊 Data Science Portfolio
 
-Bem-vindo ao meu portfólio de projetos. Aqui compartilho projetos que desenvolvi para resolver problemas complexos do mundo real, cobrindo todo o ciclo de vida dos dados: desde a **extração e engenharia de dados em tempo real** até a **modelagem preditiva utilizando Deep Learning**.
+Welcome to my project portfolio. Here, I showcase solutions developed to solve complex, real-world problems, covering the entire data lifecycle: from **real-time data extraction and engineering** to **predictive modeling using Deep Learning**.
 
-Meu objetivo é transformar fluxos de dados brutos e não estruturados em insights estratégicos automatizados.
-
----
-
-
-## 📂 Projetos em Destaque
-
-### 1. 📈 Predição de Preços de Ações da Bolsa com Redes Neurais LSTM
-**Área:** *Deep Learning, Time Series Forecasting, Finanças Quantitativas*
-
-Este projeto desenvolve um modelo preditivo de alta precisão para séries temporais financeiras, focando na volatilidade e na tendência de fechamento de ativos do mercado de ações.
-
-*   **O Problema:** Preços de ações possuem dependências temporais complexas e ruídos de curtíssimo prazo, tornando modelos de regressão tradicionais ineficientes.
-*   **A Solução:** Implementação de uma **Rede Neural Recorrente (RNN)** do tipo **LSTM (Long Short-Term Memory)**, capaz de reter padrões de longo prazo em séries temporais sem sofrer com o problema do desvanecimento do gradiente.
-*   **Abordagem Técnica:**
-    *   **Pré-processamento:** Limpeza de dados históricos e normalização de escala utilizando o `MinMaxScaler` do *Scikit-Learn*.
-    *   **Modelagem:** Arquitetura construída com *TensorFlow/Keras*, empilhando camadas LSTM com mecanismos de regularização (`Dropout`) para mitigar o *overfitting*.
-    *   **Validação:** Avaliação baseada em métricas rigorosas de erro, como RMSE (Root Mean Squared Error) e MAE (Mean Absolute Error).
-*   **Principais Tecnologias:** `TensorFlow`, `Keras`, `Scikit-Learn`, `Pandas`, `Matplotlib`.
-*   **Onde Encontrar:** Pasta /Predicao_acoes_petroleo_b3
+My goal is to transform raw, unstructured data streams into automated strategic insights.
 
 ---
 
-### 📊 2. Monitor de Inteligência Geopolítica & Econômica (Truth Social)
-**Área:** *Data Engineering, Real-Time Streaming, Web Scraping Avançado*
+## 📂 Featured Projects
 
-Um pipeline automatizado de extração e monitoramento de dados em tempo real direcionado ao perfil oficial de figuras públicas na plataforma **Truth Social**. O sistema monitora menções a termos estratégicos relacionados a mercado, petróleo e tensões geopolíticas.
+### 1. 📈 Stock Price Prediction using LSTM Neural Networks
+**Domain:** *Deep Learning, Time Series Forecasting, Quantitative Finance*
 
-*   **O Problema:** Plataformas modernas utilizam ecossistemas SPA (React/Next.js) e firewalls rígidos (Cloudflare), bloqueando raspadores tradicionais (como BeautifulSoup) ou gerando *deadlocks* de carregamento.
-*   **A Solução:** Um robô assíncrono programado em modo furtivo (*Stealth*) que, em vez de ler o layout visual (HTML), realiza a **interceptação dos pacotes brutos de API (JSON)** trafegados na rede do navegador.
-*   **Abordagem Técnica:**
-    *   **Modo Furtivo:** Injeção de scripts para camuflar variáveis de automação (`navigator.webdriver`) e emulação de comportamento humano.
-    *   **Otimização:** Bloqueio dinâmico do carregamento de mídias (imagens/fontes) para acelerar a sincronização em 82% e economizar processamento.
-    *   **Robustez de String:** Tratamento estrutural de URLs via tabela ASCII para blindar o script contra falhas de codificação de texto (*encoding*) locais do compilador.
-*   **Principais Tecnologias:** `Playwright (Async API)`, `Asyncio`, `Regular Expressions (re)`, `Urllib`.
-*   **Onde Encontrar:** Pasta /Web_Scapping_TruthSocial
+This project develops a high-precision predictive model for financial time series, focusing on asset price volatility and closing trends in the stock market.
 
----
-
-## 🛠️ Stack Tecnológica Principal
-
-*   **Linguagens de Programação:** Python (Pandas, NumPy, Scipy)
-*   **Inteligência Artificial & Deep Learning:** TensorFlow, Keras, Scikit-Learn
-*   **Engenharia de Dados & Automação:** Playwright, Asyncio, Requests, APIs RESTful
-*   **Ambientes & Ferramentas:** PyCharm, Git, Virtual Environments (.venv)
+*   **The Problem:** Stock prices possess complex temporal dependencies and short-term noise, rendering traditional regression models inefficient.
+*   **The Solution:** Implementation of a **Recurrent Neural Network (RNN)** using **LSTM (Long Short-Term Memory)** architecture, capable of retaining long-term patterns in time series without suffering from the vanishing gradient problem.
+*   **Technical Approach:**
+    *   **Preprocessing:** Historical data cleaning and scale normalization using Scikit-Learn's `MinMaxScaler`.
+    *   **Modeling:** Architecture built with *TensorFlow/Keras*, stacking LSTM layers with regularization mechanisms (`Dropout`) to mitigate overfitting.
+    *   **Validation:** Evaluation based on rigorous error metrics, such as RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error).
+*   **Core Technologies:** `TensorFlow`, `Keras`, `Scikit-Learn`, `Pandas`, `Matplotlib`.
+*   **Where to Find:** `/Stock_Price_Prediction_LSTM` folder
 
 ---
 
+### 📊 2. Geopolitical & Economic Intelligence Monitor (Truth Social)
+**Domain:** *Data Engineering, Real-Time Streaming, Advanced Web Scraping*
 
-## 📈 Resultados obtidos no Portfólio
+An automated pipeline for real-time data extraction and monitoring targeting official profiles of public figures on the **Truth Social** platform. The system monitors mentions of strategic terms related to the market, oil, and geopolitical tensions.
 
-1.  **Domínio em Séries Temporais:** Capacidade de preparar matrizes tridimensionais exigidas por modelos de Deep Learning (`[samples, time steps, features]`) e ajustar hiperparâmetros de redes neurais para previsões financeiras.
-2.  **Engenharia de Dados Resiliente:** Desenvolvimento de scripts preparados para lidar com falhas de rede, oscilações de servidores e bloqueios automatizados de plataformas web.
-3.  **Código Limpo e Assíncrono:** Uso avançado de programação orientada a eventos e programação assíncrona (`async/await`) em Python para otimização de performance.
+*   **The Problem:** Modern platforms utilize SPA ecosystems (React/Next.js) and strict firewalls (Cloudflare), blocking traditional scrapers (like BeautifulSoup) or causing loading deadlocks.
+*   **The Solution:** An asynchronous bot programmed in *Stealth* mode that, instead of parsing the visual HTML layout, **intercepts raw JSON API packets** within the browser network traffic.
+*   **Technical Approach:**
+    *   **Stealth Mode:** Script injection to mask automation variables (`navigator.webdriver`) and emulate human behavior.
+    *   **Optimization:** Dynamic blocking of media assets (images/fonts) to speed up synchronization by 82% and save processing power.
+    *   **String Robustness:** Structural handling of URLs via ASCII tables to safeguard the script against local compiler text encoding failures.
+*   **Core Technologies:** `Playwright (Async API)`, `Asyncio`, `Regular Expressions (re)`, `Urllib`.
+*   **Where to Find:** `/Web_Scapping_TruthSocial` folder
 
 ---
+
+## 🛠️ Core Tech Stack
+
+*   **Programming Languages:** Python (Pandas, NumPy, SciPy)
+*   **Artificial Intelligence & Deep Learning:** TensorFlow, Keras, Scikit-Learn
+*   **Data Engineering & Automation:** Playwright, Asyncio, Requests, RESTful APIs
+*   **Environments & Tools:** PyCharm, Git, Virtual Environments (.venv)
+
+---
+
+## 📈 Key Outcomes & Skills Demonstrated
+
+1.  **Time Series Expertise:** Ability to prepare the three-dimensional matrices required by Deep Learning models (`[samples, time steps, features]`) and fine-tune neural network hyperparameters for financial forecasting.
+2.  **Resilient Data Engineering:** Development of scripts built to handle network failures, server fluctuations, and automated anti-bot blocks on web platforms.
+3.  **Clean & Asynchronous Code:** Advanced application of event-driven and asynchronous programming (`async/await`) in Python for high-performance optimization.
