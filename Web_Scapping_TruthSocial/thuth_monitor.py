@@ -22,7 +22,7 @@ if not os.path.exists(caminho_navegador):
         print("✅ Navegadores instalados com sucesso!")
     except Exception as e:
         print(f"Aviso de infraestrutura: {e}")
-        
+
 # Garante a instalação do binário leve do Chromium na nuvem
 try:
     import playwright
