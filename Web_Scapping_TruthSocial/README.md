@@ -5,58 +5,81 @@ This project consists of an automated pipeline for real-time data extraction and
 Developed as a core component of my Data Science portfolio, this project overcomes the traditional challenges of web scraping (such as Cloudflare mitigation blocks, dynamic JavaScript rendering, and fragile CSS classes) by leveraging advanced stealth automation and network traffic interception techniques.
 
 ---
+## 🧠 Architectural Overview & Concurrency Model
 
-## 🚀 Key Features
+Integrating an asynchronous browser automation framework like **Playwright Async** inside a graphical user interface (GUI) poses significant thread-concurrency challenges. If executed on a single thread, the endless polling loop would starve the GUI event processor, causing the window to freeze.
 
-*   **Headless Background Monitoring:** The script runs completely invisibly, minimizing processing and memory overhead.
-*   **Hidden API Interception:** Instead of relying on a frequently changing visual layout (HTML/CSS), the code directly captures raw JSON packets from network traffic exchanged between the browser and the server (`/api/v1/accounts/.../statuses`).
-*   **Smart Multi-Term Filtering:** Real-time analysis of new publications based on a list of strategic keywords: `economy`, `Iran`, `conflict`, `Hormuz`, `oil`, `taxes`, and `tariffs`.
-*   **Asynchronous Architecture & Anti-Duplication:** Event-driven implementation with strict pointer tracking (unique incremental `ID`), ensuring no post is processed twice or duplicated.
-*   **Anti-Bot Mechanism (Stealth Mode):** Bypasses automation fingerprints (`navigator.webdriver`) and spoofs network headers to emulate human behavior, significantly mitigating Cloudflare challenges.
+To achieve non-blocking performance, this software implements a robust **Multithreading & Asynchronous Event Loop** architecture:
 
----
-
-## 🛠️ Tech Stack & Libraries
-
-*   **Python 3.13+**: Core programming language.
-*   **Playwright (Async API):** Browser automation framework used to render the platform's React/Next.js ecosystem and intercept network requests.
-*   **Asyncio:** Native library for managing asynchronous event loops and concurrency.
-*   **urllib.parse (urljoin):** Utilized for structural URL normalization, safeguarding the script against local operating system encoding issues.
-*   **Regular Expressions (re):** String parsing and cleaning to eliminate raw HTML tags contained within the API payloads.
-
----
-
-## 📈 Technical Insights & Key Takeaways
-
-### 1. Resolving Loading Deadlocks
-Social media platforms based on Mastodon/Next.js architectures rely on WebSocket connections and continuous media loading. Leveraging `wait_until="domcontentloaded"` and strict timeout limits (35 seconds) successfully prevented execution deadlocks and script freezes.
-
-### 2. Encoding Safeguards
-During development, environmental variations in local compilers were found to drop the `/` character in compound strings (`com/@`). This was permanently resolved by replacing static string concatenations with dynamic construction via `urljoin` and ASCII code injection (`chr(47)`).
-
-### 3. Data Extraction Efficiency
-Targeting the direct API response (`response.json()`) proved to be **82% faster** than traditional DOM-parsing methods (`page.query_selector_all`). Additionally, this methodology makes the pipeline immune to any design or interface updates on Truth Social.
-
----
-
-## 📈 Project Impact & Results
-
-### Continuous Monitoring
-The system monitors posts from the U.S. President concerning current global conflicts that directly affect commodity pricing—particularly oil. 
-These publications have the potential to drive high volatility into commodity markets and, consequently, impact global financial assets (specifically in Brazil, given the high correlation between commodities and its national economy).
-
----
-
-## 🔧 How to Run the Project
-
-1. Clone the repository to your local machine.
-2. Ensure your virtual environment (`.venv`) is activated.
-3. Install the required packages and the Chromium rendering engine:
-```bash
-pip install playwright
-python -m playwright install
+```text
+ ┌────────────────────────────────────────────────────────┐
+ │                   MAIN THREAD (GUI)                    │
+ │  - CustomTkinter Window Loop (.mainloop())             │
+ │  - Responsive User Input UI & Rendered Log Displays    │
+ └───────────────────────────┬────────────────────────────┘
+                             │ (Spawns on Start Button Click)
+                             ▼
+ ┌────────────────────────────────────────────────────────┐
+ │                 BACKGROUND THREAD                      │
+ │  - Independent OS Worker Thread (threading.Thread)     │
+ │  - Isolated Asyncio Event Loop (asyncio.new_event_loop)│
+ │  ┌──────────────────────────────────────────────────┐  │
+ │  │             PLAYWRIGHT ASYNC WORKER              │  │
+ │  │  - Headless Chromium Interception Pipeline       │  │
+ │  │  - Network Hook: Intercepts JSON REST API Traffic│  │
+ │  └──────────────────────────────────────────────────┘  │
+ └────────────────────────────────────────────────────────┘
 ```
-4. Execute the main script:
+
+### Key Technical Engineering Highlights
+* **Network Response Interception**: Rather than relying on fragile HTML DOM parsing (which breaks often during layout changes), the core script registers a network hook (`page.on("response")`) to capture the underlying raw JSON payloads directly from the platform's endpoints, providing 100% data integrity.
+* **Anti-Fingerprinting**: Injects automated fingerprint concealment scripts (`AutomationControlled` bypasses, custom User-Agents, and ASCII forced string routing) to mimic authentic humancentric navigation, bypassing Cloudflare's browser telemetry.
+
+---
+
+## 🛠️ Feature Engineering & Keyword Matching
+
+The engine transforms raw text streams into directional risk signals by cleaning input metadata using RegEx tag stripping ($HTML \to Plain\ Text$) and executing an optimized matching vector against high-priority market targets:
+
+$$\text{Match} = \{ w \in \text{Keywords} \mid w_{\text{lowercase}} \in \text{Text}_{\text{lowercase}} \}$$
+
+When a hit occurs, the background worker thread safely pushes the memory block down to the UI console using standard terminal serialization strings.
+
+---
+
+## 💻 Technical Stack & Environment
+
+### Dependencies
+* Python 3.10+
+* Playwright (Chromium Headless Core)
+* CustomTkinter
+* Asyncio / Threading
+
+### System Requirements & Standalone Compilation
+The source code has been successfully compiled into a **standalone native `.exe` binary** using PyInstaller. This encapsulates all required application hooks inside a single executable frame:
+
 ```bash
-python truth_social.py
+# To compile the standalone executable locally:
+pip install customtkinter playwright pyinstaller
+playwright install chromium
+pyinstaller --noconsole --onefile truth_monitor_desktop.py
 ```
+The compiled artifact will look for existing Chromium browser signatures on the host system machine's standard AppData environment local cache paths.
+
+---
+
+## 🚀 Execution Instructions
+
+### Running from Python Source:
+```bash
+# 1. Navigate to the project directory
+cd Web_Scapping_TruthSocial
+
+# 2. Run the application
+python truth_monitor_desktop.py
+```
+
+### UI Controls
+1. **Target Input**: Configure any username string (Default: `realDonaldTrump`).
+2. **Alert Keywords**: Comma-separated tracking parameters (e.g., `conflict, oil, tariffs`).
+3. **Polling Interval**: Adjustable delay buffer parameter (in seconds) to control extraction frequency.
