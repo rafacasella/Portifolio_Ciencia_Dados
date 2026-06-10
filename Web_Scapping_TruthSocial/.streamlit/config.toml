@@ -1,6 +1,0 @@
-[server]
-# Roda o instalador do Playwright no terminal com permissões de ambiente do servidor antes de disparar o app
-runOnSave = true
-
-[browser]
-gatherUsageStats = false
