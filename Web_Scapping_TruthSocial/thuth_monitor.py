@@ -8,6 +8,23 @@ from urllib.parse import urljoin
 from playwright.async_api import async_playwright
 
 # =============================================================================
+# INICIALIZAÇÃO DE INFRAESTRUTURA PARA AMBIENTES DE NUVEM
+# =============================================================================
+os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "/home/adminuser/.cache/ms-playwright"
+
+@st.cache_resource
+def inicializar_navegadores_nuvem():
+    try:
+        import subprocess
+        print("📥 Sincronizando binários do Chromium com o ambiente Linux...")
+        subprocess.run(["playwright", "install", "chromium"], check=True)
+        print("✅ Navegadores prontos para execução!")
+    except Exception as e:
+        print(f"Aviso de infraestrutura de inicialização: {e}")
+
+inicializar_navegadores_nuvem()
+
+# =============================================================================
 # CONTROLE DE ESTADO DA SESSÃO (Evita perda de dados ao atualizar a interface)
 # =============================================================================
 if "historico_posts" not in st.session_state:
