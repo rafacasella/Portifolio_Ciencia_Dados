@@ -1,10 +1,5 @@
 # 🤖 AI-Driven Quantitative Trading Pipeline & Analytics Dashboard
 
-[![Python Version](https://shields.io)](https://python.org)
-[![Framework](https://shields.io)](https://streamlit.io)
-[![Data Source](https://shields.io)](https://yahoo.com)
-[![Machine Learning](https://shields.io)](https://scikit-learn.org)
-
 An end-to-end quantitative finance pipeline that extracts historical market data, engineers technical and statistical features, trains a Machine Learning classifier to predict next-day directional movements, simulates rigorous backtesting, and deploys an interactive analytics dashboard.
 
 ---
