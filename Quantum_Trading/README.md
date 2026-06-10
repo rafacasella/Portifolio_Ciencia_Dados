@@ -1,5 +1,5 @@
 # 🤖 AI-Driven Quantitative Trading Pipeline & Analytics Dashboard 
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)(https://quantumtradingg.streamlit.app/?embed=true&embed_options=disable_light_theme)
+(https://quantumtradingg.streamlit.app/?embed=true&embed_options=disable_light_theme)
 
 An end-to-end quantitative finance pipeline that extracts historical market data, engineers technical and statistical features, trains a Machine Learning classifier to predict next-day directional movements, simulates rigorous backtesting, and deploys an interactive analytics dashboard.
 
